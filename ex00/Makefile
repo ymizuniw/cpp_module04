@@ -3,20 +3,15 @@ CC=c++
 CFLAGS=-std=c++98 -Wall -Wextra -Werror
 SRCS=\
 	Animal.cpp\
-	Animal.hpp\
 	Cat.cpp\
-	Cat.hpp\
 	Dog.cpp\
-	Dog.hpp\
 	main.cpp\
 	WrongAnimal.cpp\
-	WrongAnimal.hpp\
-	WrongCat.cpp\
-	WrongCat.hpp
+	WrongCat.cpp
 
 OBJS=$(SRCS:.cpp=.o)
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 %.o: %.cpp
