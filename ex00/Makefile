@@ -8,7 +8,7 @@ SRCS=\
 	Cat.hpp\
 	Dog.cpp\
 	Dog.hpp\
-	main.cpp\
+	main.c\
 	WrongAnimal.cpp\
 	WrongAnimal.hpp\
 	WrongCat.cpp\
@@ -24,4 +24,4 @@ clean:
 	rm -f $(OBJS)
 fclean: clean 
 	rm -f $(NAME)
-re: fclean all
+re: fclean  all
