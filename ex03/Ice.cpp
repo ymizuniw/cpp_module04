@@ -1,13 +1,6 @@
 #include "Ice.hpp"
 #include "print_utils.hpp"
 
-        // Ice(void);
-        // Ice(Ice const &other);
-        // Ice &operator=(Ice const &other);
-        // ~Ice(void);
-        // AMateria *clone(void) const;
-        // void use(ICharacter &target);
-
 Ice::Ice(void) : AMateria("ice")
 {
     print_msg("Ice constructor called.");
@@ -40,6 +33,6 @@ AMateria *Ice::clone(void) const
 
 void Ice::use(ICharacter &target)
 {
-    std::cout << "* heals " 
-        << target.getName() << "'s wounds" << std::endl;
+    std::cout << "* shoots an ice bolt at " 
+        << target.getName() << " *" << std::endl;
 }

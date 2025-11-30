@@ -11,12 +11,12 @@ class AMateria
     public:
         AMateria(void);
         AMateria(AMateria const &materia);
-        AMateria &operator=(AMateria const &materia);
-        virtual ~AMateria(void);
         AMateria(std::string const &type);
-        std::string const &getType(void) const;
-        virtual AMateria *clone(void) const = 0;
-        virtual void use(ICharacter &target) = 0;
+        AMateria            &operator=(AMateria const &materia);
+        virtual             ~AMateria(void);
+        std::string const   &getType(void) const;
+        virtual AMateria    *clone(void) const = 0;
+        virtual void        use(ICharacter &target) = 0;
 };
 
 #endif
