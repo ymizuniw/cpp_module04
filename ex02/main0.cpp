@@ -27,9 +27,9 @@
 // sound. Implement and turn in more tests than the ones given above.
 
 int main(void) {
-  const Animal *meta = new Animal(); // call animal df constructor
-  const Animal *j = new Dog();       // call animal/dog constructor
-  const Animal *i = new Cat();       // call animal/cat constructor
+  // const Animal *meta = new Animal(); // call animal df constructor
+  const Animal *j = new Dog(); // call animal/dog constructor
+  const Animal *i = new Cat(); // call animal/cat constructor
   const WrongAnimal *wa = new WrongAnimal();
   const WrongAnimal *wc = new WrongCat();
 
@@ -37,7 +37,7 @@ int main(void) {
   std::cout << i->getType() << " " << std::endl;
   i->makeSound();
   j->makeSound();
-  meta->makeSound();
+  // meta->makeSound();
   wa->makeSound();
   wc->makeSound();
   return 0;
