@@ -1,10 +1,10 @@
 #ifndef DOG_HPP
 #define DOG_HPP
 
-#include "AbstractAnimal.hpp"
+#include "Animal.hpp"
 #include "Brain.hpp"
 
-class Dog : public AbstractAnimal
+class Dog : public Animal
 {
     private:
         Brain *brain_;
@@ -14,6 +14,9 @@ class Dog : public AbstractAnimal
         Dog const &operator=(Dog const &other);
         ~Dog(void);
         virtual void makeSound(void) const;
+#ifdef DEBUG
+  void print_ideas(void);
+#endif
 };
 
 #endif

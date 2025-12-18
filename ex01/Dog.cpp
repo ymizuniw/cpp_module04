@@ -1,39 +1,35 @@
 #include "Dog.hpp"
+#include <iomanip>
+#include <iostream>
 
-Dog::Dog(void) : Animal(), brain_(new Brain())
-{
-    type_="Dog";
-    std::cout << "Dog constructor called." << std::endl;
+Dog::Dog(void) : Animal("Cat") {
+  brain_ = new Brain();
+  std::cout << std::setw(9) << std::right << "[Dog] ";
+  std::cout << "constructor called" << std::endl;
 }
 
-Dog::Dog(Dog const &other) : Animal(), brain_(new Brain())
-{
-    if (this!=&other)
-    {
-        type_="Dog";
-        Animal::operator=(other);
-    }
-    std::cout << "Dog copy-constructor called." << std::endl;
+Dog::Dog(Dog const &other) : Animal() {
+  brain_ = other.brain_;
+  std::cout << std::setw(9) << std::right << "[Dog] ";
+  std::cout << "copy-constructor called" << std::endl;
 }
 
-Dog const &Dog::operator=(Dog const &other)
-{
-    if (this!=&other)
-    {
-        delete (brain_);
-        brain_ = new Brain(*other.brain_);
-        Animal::operator=(other);
-    }
-    return (*this);
+Dog const &Dog::operator=(Dog const &other) {
+  if (this != &other)
+    Animal::operator=(other);
+  return (*this);
 }
 
-Dog::~Dog(void)
-{
-    delete (brain_);
-    std::cout << "Dog destructor called." << std::endl;
+Dog::~Dog(void) {
+  std::cout << std::setw(9) << std::right << "[Dog] ";
+  std::cout << "destructor called" << std::endl;
 }
 
-void Dog::makeSound(void) const
-{
-    std::cout << "bawow" << std::endl;
+void Dog::makeSound(void) const { std::cout << "bowwow" << std::endl; }
+
+#ifdef DEBUG
+void Dog::print_ideas(void) {
+  for (size_t i = 0; i < 100; i++)
+    std::cout << brain_->getIdea(i) << std::endl;
 }
+#endif

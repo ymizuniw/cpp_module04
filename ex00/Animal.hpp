@@ -1,7 +1,7 @@
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
-#include <iostream>
+#include <string>
 
 class Animal
 {
@@ -9,6 +9,7 @@ class Animal
         std::string type_;
     public:
         Animal(void);
+        Animal(std::string type_);
         Animal(Animal const &other);
         Animal &operator=(Animal const &other);
         virtual ~Animal(void);

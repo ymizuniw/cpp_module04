@@ -1,26 +1,43 @@
 #include "Brain.hpp"
-#include "print_utils.hpp"
+#include <iomanip>
+#include <iostream>
+#include <string>
 
-Brain::Brain(void)
-{
-    bzero(ideas_, 100);
-    print_msg("Brain construcotr called.");
+Brain::Brain(void) {
+  for (size_t i = 0; i < 100; i++) {
+    std::string num = std::to_string(i);
+    ideas_[i] = "idea" + num;
+  }
+  std::cout << std::setw(9) << std::right << "[Brain] ";
+  std::cout << "constructor called" << std::endl;
 }
 
-Brain::Brain(const Brain &other)
-{
-    memcpy(ideas_, other.ideas_, sizeof(ideas_)/sizeof(ideas_[0]));     
-    print_msg("Brain copy-construcotr called.");
+Brain::Brain(const Brain &other) {
+  for (size_t i = 0; i < 100; i++) {
+    ideas_[i] = other.ideas_[i];
+  }
+  std::cout << std::setw(9) << std::right << "[Brain] ";
+  std::cout << "Brain copy-constructor called" << std::endl;
 }
 
-Brain &Brain::operator=(const Brain &other)
-{
-    if (this!=&other)
-        memcpy(ideas_, other.ideas_, 100);
-    return (*this);
+Brain &Brain::operator=(const Brain &other) {
+  if (this != &other) {
+    for (size_t i = 0; i < 100; i++) {
+      ideas_[i] = other.ideas_[i];
+    }
+  }
+  return (*this);
 }
 
-Brain::~Brain(void)
-{
-    print_msg("Brain destructor is called.");
+Brain::~Brain(void) {
+  std::cout << std::setw(9) << std::right << "[Brain] ";
+  std::cout << "Brain destructor is called" << std::endl;
 }
+
+#ifdef DEBUG
+std::string Brain::getIdea(size_t i) {
+  if (i >= 100)
+    return ("invalid index");
+  return (ideas_[i]);
+}
+#endif

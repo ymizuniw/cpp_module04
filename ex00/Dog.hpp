@@ -2,8 +2,6 @@
 #define DOG_HPP
 
 #include "Animal.hpp"
-#include <iostream>
-#include <iomanip>
 
 class Dog : public Animal
 {
