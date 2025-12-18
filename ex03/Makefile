@@ -1,25 +1,29 @@
-NAME=test
-CPP=c++
-CFLAGS=-std=c++98 -Wall -Wextra -Werror
-SRCS=\
-	AMateria.cpp\
-	Cure.cpp\
-	Ice.cpp\
-	MateriaSource.cpp\
-	Character.cpp\
-	print_utils.cpp\
-	main.cpp
-INC=-I./includes
-OBJS=$(SRCS:.cpp=.o)
-$(NAME): $(OBJS)
-	$(CPP) $(CFLAGS) -o $@ $(OBJS)
-%.o: %.cpp
-	$(CPP) $(CFLAGS) $(INC) -c $< -o $@
+NAME=test03
+SRCS=AMateria.cpp\
+Character.cpp\
+Cure.cpp\
+Ice.cpp\
+MateriaSource.cpp\
+IMateriaSource.cpp\
+ICharacter.cpp\
+main.cpp
+OBJS=$(SRCS:%.cpp=%.o)
+
+CXX=c++
+CXXFLAGS=-std=c++98 -Wall -Wextra -Werror -pedantic-errors
+CPP=-Iincludes/
 
 all: $(NAME)
+
+%.o:%.cpp
+	$(CXX) $(CXXFLAGS) $(CPP) -c $< -o $@
+
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 re: fclean all
 .PHONY: all clean fclean re

@@ -1,10 +1,12 @@
 #include "Ice.hpp"
-#include "print_utils.hpp"
+#include <iostream>
 
-Ice::Ice(void) : AMateria("ice") { print_msg("Ice constructor called."); }
+Ice::Ice(void) : AMateria("ice") {
+  std::cout << "Ice default constructor called." << std::endl;
+}
 
 Ice::Ice(Ice const &other) : AMateria(other.type_) {
-  print_msg("Ice copy-constructor called.");
+  std::cout << "Ice copy-constructor called." << std::endl;
 }
 
 Ice &Ice::operator=(Ice const &other) {
@@ -14,7 +16,7 @@ Ice &Ice::operator=(Ice const &other) {
   return (*this);
 }
 
-Ice::~Ice(void) { print_msg("Ice destructor called."); }
+Ice::~Ice(void) { std::cout << "Ice destructor called." << std::endl; }
 
 AMateria *Ice::clone(void) const {
   Ice *cp_ice = new Ice(*this);
