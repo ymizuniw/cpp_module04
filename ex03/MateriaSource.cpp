@@ -1,13 +1,13 @@
 #include "MateriaSource.hpp"
 #include <iostream>
 
-MateriaSource::MateriaSource(void) {
+MateriaSource::MateriaSource(void): IMateriaSource() {
   for (size_t i = 0; i < 4; i++)
-    materia_src_[i] = nullptr;
+    materia_src_[i] = NULL;
   std::cout << "MateriaSource constructor called." << std::endl;
 }
 
-MateriaSource::MateriaSource(MateriaSource const &other) {
+MateriaSource::MateriaSource(MateriaSource const &other): IMateriaSource(other) {
   for (size_t i = 0; i < 4; i++)
     materia_src_[i] = other.materia_src_[i];
   std::cout << "MateriaSource constructor called." << std::endl;
@@ -23,7 +23,7 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
 
 MateriaSource::~MateriaSource(void) {
   for (size_t i = 0; i < 4; i++) {
-    if (materia_src_[i] != nullptr)
+    if (materia_src_[i] != NULL)
       delete (materia_src_[i]);
   }
   std::cout << "MateriaSource destructor called." << std::endl;
@@ -32,7 +32,7 @@ MateriaSource::~MateriaSource(void) {
 void MateriaSource::learnMateria(AMateria *materia) {
   size_t i = 0;
   for (; i < 4; i++) {
-    if (materia_src_[i] == nullptr) {
+    if (materia_src_[i] == NULL) {
       materia_src_[i] = materia->clone();
       break;
     }

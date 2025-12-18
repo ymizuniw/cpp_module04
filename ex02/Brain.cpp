@@ -2,10 +2,13 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 Brain::Brain(void) {
   for (size_t i = 0; i < 100; i++) {
-    std::string num = std::to_string(i);
+    std::ostringstream oss;
+    oss << i;
+    std::string num = oss.str();
     ideas_[i] = "idea" + num;
   }
   std::cout << std::setw(9) << std::right << "[Brain] ";
