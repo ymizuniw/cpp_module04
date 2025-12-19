@@ -1,13 +1,14 @@
 #include "MateriaSource.hpp"
 #include <iostream>
 
-MateriaSource::MateriaSource(void): IMateriaSource() {
+MateriaSource::MateriaSource(void) : IMateriaSource() {
   for (size_t i = 0; i < 4; i++)
     materia_src_[i] = NULL;
   std::cout << "MateriaSource constructor called." << std::endl;
 }
 
-MateriaSource::MateriaSource(MateriaSource const &other): IMateriaSource(other) {
+MateriaSource::MateriaSource(MateriaSource const &other)
+    : IMateriaSource(other) {
   for (size_t i = 0; i < 4; i++)
     materia_src_[i] = other.materia_src_[i];
   std::cout << "MateriaSource constructor called." << std::endl;
@@ -46,5 +47,5 @@ AMateria *MateriaSource::createMateria(std::string const &type) {
       return (cp_materia);
     }
   }
-  return (0);
+  return (NULL);
 }

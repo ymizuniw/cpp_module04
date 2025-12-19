@@ -13,7 +13,8 @@ Character::Character(std::string const name) : ICharacter(), name_(name) {
     slot_[i] = NULL;
 }
 
-Character::Character(Character const &other) : ICharacter(other), name_(other.name_) {
+Character::Character(Character const &other)
+    : ICharacter(other), name_(other.name_) {
   std::cout << "Character copy constructor called" << std::endl;
   if (this != &other) {
     for (size_t i = 0; i < 4; i++)

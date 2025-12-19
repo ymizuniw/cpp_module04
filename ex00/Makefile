@@ -1,24 +1,24 @@
-NAME=test
-CC=c++
-CFLAGS=-std=c++98 -Wall -Wextra -Werror
-SRCS=\
-	Animal.cpp\
-	Cat.cpp\
-	Dog.cpp\
-	main.cpp\
-	WrongAnimal.cpp\
+NAME = test
+CXX = c++
+CXXCFLAGS = -std=c++98 -Wall -Wextra -Werror
+SRCS = \
+	Animal.cpp \
+	Cat.cpp \
+	Dog.cpp \
+	main.cpp \
+	WrongAnimal.cpp \
 	WrongCat.cpp
 
 OBJS=$(SRCS:.cpp=.o)
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CXX) $(CXXCFLAGS) -o $@ $(OBJS)
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXCFLAGS) -c $< -o $@
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXCFLAGS) -c $< -o $@
 all: $(NAME)
 clean:
 	rm -f $(OBJS)
-fclean: clean 
+fclean: clean
 	rm -f $(NAME)
 re: fclean  all

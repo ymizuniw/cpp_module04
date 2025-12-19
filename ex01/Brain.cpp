@@ -1,8 +1,8 @@
 #include "Brain.hpp"
 #include <iomanip>
 #include <iostream>
-#include <string>
 #include <sstream>
+#include <string>
 
 Brain::Brain(void) {
   for (size_t i = 0; i < 100; i++) {

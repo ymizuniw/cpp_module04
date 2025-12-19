@@ -1,21 +1,21 @@
-NAME=test03
-SRCS=AMateria.cpp\
-Character.cpp\
-Cure.cpp\
-Ice.cpp\
-MateriaSource.cpp\
-IMateriaSource.cpp\
-ICharacter.cpp\
+NAME = test03
+SRCS = AMateria.cpp \
+Character.cpp \
+Cure.cpp \
+Ice.cpp \
+MateriaSource.cpp \
+IMateriaSource.cpp \
+ICharacter.cpp \
 main.cpp
 OBJS=$(SRCS:%.cpp=%.o)
 
-CXX=c++
-CXXFLAGS=-std=c++98 -Wall -Wextra -Werror -pedantic-errors
-CPP=-Iincludes/
+CXX = c++
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -pedantic-errors -g
+CPP = -Iincludes/
 
 all: $(NAME)
 
-%.o:%.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(CPP) -c $< -o $@
 
 $(NAME): $(OBJS)

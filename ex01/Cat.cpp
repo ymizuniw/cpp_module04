@@ -24,6 +24,7 @@ Cat &Cat::operator=(Cat const &other) {
 Cat::~Cat(void) {
   std::cout << std::setw(9) << std::right << "[Cat] ";
   std::cout << "destructor called" << std::endl;
+  delete brain_;
 }
 
 void Cat::makeSound(void) const { std::cout << "meaow" << std::endl; }
