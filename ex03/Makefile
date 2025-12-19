@@ -4,8 +4,6 @@ Character.cpp \
 Cure.cpp \
 Ice.cpp \
 MateriaSource.cpp \
-IMateriaSource.cpp \
-ICharacter.cpp \
 main.cpp
 OBJS=$(SRCS:%.cpp=%.o)
 
