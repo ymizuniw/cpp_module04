@@ -10,14 +10,17 @@ Cat::Cat(void) : Animal("Cat") {
 }
 
 Cat::Cat(Cat const &other) : Animal(other) {
-  brain_ = other.brain_;
+  brain_ = new Brain(*other.brain_);
   std::cout << std::setw(9) << std::right << "[Cat] ";
   std::cout << "copy-constructor called" << std::endl;
 }
 
 Cat &Cat::operator=(Cat const &other) {
-  if (this != &other)
+  if (this != &other) {
     Animal::operator=(other);
+    delete brain_;
+    brain_ = new Brain(*other.brain_);
+  }
   return (*this);
 }
 
@@ -30,7 +33,7 @@ Cat::~Cat(void) {
 void Cat::makeSound(void) const { std::cout << "meaow" << std::endl; }
 
 #ifdef DEBUG
-void Cat::print_ideas(void) {
+void Cat::print_ideas(void) const {
   for (size_t i = 0; i < 100; i++)
     std::cout << brain_->getIdea(i) << std::endl;
 }

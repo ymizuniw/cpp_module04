@@ -32,6 +32,6 @@ void Animal::makeSound(void) const { std::cout << "Animal!" << std::endl; }
 
 std::string Animal::getType(void) const { return (type_); }
 
-#ifdef DEBUG
-void Animal::print_ideas(void) { ; }
-#endif
+// #ifdef DEBUG
+// void Animal::print_ideas(void) { ; }
+// #endif
