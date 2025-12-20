@@ -24,5 +24,6 @@ int main(void) {
 #endif
   for (size_t k = 0; k < arrSize; k++)
     delete (arr[k]);
+  delete[] arr;
   return (0);
 }

@@ -1,4 +1,4 @@
-NAME = test
+NAME = test00
 CXX = c++
 CXXCFLAGS = -std=c++98 -Wall -Wextra -Werror
 SRCS = \

@@ -164,5 +164,6 @@ int main(void) {
     return (1);
   }
   wrongCat_makeSound_test();
+  std::cout << "Main Exits..." << std::endl;
   return 0;
 }
