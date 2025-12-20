@@ -1,42 +1,73 @@
 #include "includes/AMateria.hpp"
 #include "includes/Character.hpp"
 #include "includes/Cure.hpp"
+#include "includes/ICharacter.hpp"
+#include "includes/IMateriaSource.hpp"
 #include "includes/Ice.hpp"
 #include "includes/MateriaSource.hpp"
-#include <iostream>
 
 int main(void) {
-  IMateriaSource *src = new MateriaSource();
-  src->learnMateria(new Ice()); // template ?
-  src->learnMateria(new Cure());
 
-  // createMateria() and ICharacter::equip()
-  ICharacter *me = new Character("me"); // only copy ICharacter part?
-  AMateria *ice;
-  AMateria *cure;
+  // MateriaSource
+  IMateriaSource *source = new MateriaSource();
 
-  ice = src->createMateria("ice"); // return clone of materia.
-  cure = src->createMateria("cure");
-  me->equip(ice);
-  me->equip(cure);
+  // learn
+  source->learnMateria(new Ice());
+  source->learnMateria(new Cure());
+  source->learnMateria(new Ice());
+  source->learnMateria(new Cure());
+
+  // over learning
+  AMateria *olice = new Ice();
+  source->learnMateria(olice);
+
+  // create
+  AMateria *ices[10];
+  for (int i = 0; i < 10; i++) {
+    AMateria *ice = source->createMateria("ice"); // lower case ice.
+    ices[i] = ice;
+  }
+
+  AMateria *cures[10];
+  for (int j = 0; j < 10; j++) {
+    AMateria *cure = source->createMateria("cure");
+    cures[j] = cure;
+  }
+
+  int i = 0;
+  int j = 0;
+  // Character
   ICharacter *bob = new Character("bob");
-  me->use(0, *bob); // use ice
+  ICharacter *me = new Character("me");
+  // ICharacter *jenny = new Character("jenny");
+  // equip
+  bob->equip(ices[i++]);
+  bob->equip(ices[i++]);
+  bob->equip(ices[i++]);
+  bob->equip(ices[i++]);
+  bob->equip(cures[j]); // cannnot equip
+  // unequip
+  AMateria *stash = bob->getMateria(0);
+  bob->unequip(0);
 
-  AMateria *stash = me->getMateria(0);
-  me->unequip(0);
-  me->use(0, *bob); // use ice
-  me->equip(stash);
-  me->use(0, *bob); // use ice
-  me->use(1, *bob); // use cure
-  // delete stash;
-  AMateria *cure2 = src->createMateria("cure");
-  bob->equip(cure2);
-  bob->use(0, *me);
-  std::cout << "[ delete me ]" << std::endl;
-  delete me;
-  std::cout << "[ delete bob ]" << std::endl;
+  me->equip(cures[j++]);
+  me->use(0, *bob);
+  // use
+  for (int k = 0; k < 5;
+       k++) { // it also test unequipped slot , and out or slot range idx 4
+    bob->use(k, *me);
+  }
+  for (; i < 10; i++) {
+    delete ices[i];
+  }
+  for (; j < 10; j++) {
+    delete cures[j];
+  }
+  // std::cout << "reached!" << std::endl;
+  delete source;
+  delete olice;
   delete bob;
-  std::cout << "[ delete src ]" << std::endl;
-  delete src;
+  delete me;
+  delete stash;
   return (0);
 }
