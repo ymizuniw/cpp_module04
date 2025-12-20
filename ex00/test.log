@@ -1,0 +1,74 @@
+=====================AnimalTest=====================
+Animal default constructor called
+Animal copy-constructor called
+Animal default constructor called
+Animal destructor called
+Animal destructor called
+Animal destructor called
+=====================DoggyTest=====================
+Animal parameterized constructor called
+Dog constructor called
+Animal parameterized constructor called
+Dog copy-constructor called
+Animal parameterized constructor called
+Dog constructor called
+Dog destructor called
+Animal destructor called
+Dog destructor called
+Animal destructor called
+Dog destructor called
+Animal destructor called
+Animal parameterized constructor called
+Dog constructor called
+bowwow
+Dog destructor called
+Animal destructor called
+=====================CattyTest=====================
+Animal parameterized constructor called
+Cat constructor called
+Animal copy-constructor called
+Cat copy-constructor called
+Animal parameterized constructor called
+Cat constructor called
+Cat destructor called
+Animal destructor called
+Cat destructor called
+Animal destructor called
+Cat destructor called
+Animal destructor called
+Animal parameterized constructor called
+Cat constructor called
+meaow
+Cat destructor called
+Animal destructor called
+=====================WrongAnimalTest=====================
+WrongAnimal default constructor called.
+WrongAnimal copy-constructor called.
+WrongAnimal default constructor called.
+WrongAnimal destructor called.
+WrongAnimal destructor called.
+WrongAnimal destructor called.
+Animal parameterized constructor called
+Cat constructor called
+meaow
+Cat destructor called
+Animal destructor called
+=====================WrongCattyTest=====================
+WrongAnimal parameterized constructor called.
+WrongCat default constructor called.
+WrongAnimal copy-constructor called.
+WrongCat copy-constructor called.
+WrongAnimal parameterized constructor called.
+WrongCat default constructor called.
+WrongCat destructor called.
+WrongAnimal destructor called.
+WrongCat destructor called.
+WrongAnimal destructor called.
+WrongCat destructor called.
+WrongAnimal destructor called.
+WrongAnimal parameterized constructor called.
+WrongCat default constructor called.
+Wrong cat's meaow!
+WrongCat destructor called.
+WrongAnimal destructor called.
+Main Exits...
