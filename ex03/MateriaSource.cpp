@@ -38,6 +38,10 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
 }
 
 MateriaSource::~MateriaSource(void) {
+  for (int i = 0; i < 4; i++) {
+    if (materia_src_[i] != NULL)
+      delete (materia_src_[i]);
+  }
   std::cout << "MateriaSource destructor called" << std::endl;
 }
 
