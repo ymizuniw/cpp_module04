@@ -9,14 +9,17 @@ Dog::Dog(void) : Animal("Dog") {
 }
 
 Dog::Dog(Dog const &other) : Animal(other) {
-  brain_ = other.brain_;
+  brain_ = new Brain(*other.brain_);
   std::cout << std::setw(9) << std::right << "[Dog] ";
   std::cout << "copy-constructor called" << std::endl;
 }
 
 Dog const &Dog::operator=(Dog const &other) {
-  if (this != &other)
+  if (this != &other) {
     Animal::operator=(other);
+    delete brain_;
+    brain_ = new Brain(*other.brain_);
+  }
   return (*this);
 }
 

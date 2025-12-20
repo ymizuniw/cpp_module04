@@ -1,11 +1,11 @@
 #include "Dog.hpp"
 #include <iostream>
 
-Dog::Dog(void) : Animal("Cat") {
+Dog::Dog(void) : Animal("Dog") {
   std::cout << "Dog constructor called" << std::endl;
 }
 
-Dog::Dog(Dog const &other) : Animal() {
+Dog::Dog(Dog const &other) : Animal("Dog") {
   if (this != &other) {
     Animal::operator=(other);
   }
