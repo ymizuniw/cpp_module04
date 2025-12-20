@@ -1,10 +1,15 @@
 #!/bin/bash
 
+# set -o errexit  # エラー時にスクリプトを終了する
+set -o nounset  # 未定義の変数を参照したらエラー出して終了する
+set -o pipefail # 最後のエラーステータスを返す
+# set -o xtrace   # 実行するコマンドを逐一表示する
+
 UNAME=$(uname)
 if [ "$UNAME" = "Linux" ]; then
     VALG=("valgrind" "--leak-check=full" "--show-leak-kinds=all" "--error-exitcode=1" "-q")
 else
-    VALG=()
+    VALG=(true)
 fi
 
 MAKE_FAST=("make" "-j$(nproc)")
@@ -12,7 +17,7 @@ MAKE_FAST=("make" "-j$(nproc)")
 run() {
     DIR=$1
     BIN=$2
-    DEBUG_FLAG=$3
+    DEBUG_FLAG=${3:-}
 
     cd "$DIR" || exit 1
     ${MAKE_FAST[@]} re -s $DEBUG_FLAG && ${VALG[@]} "./$BIN" >test.log 2>&1
