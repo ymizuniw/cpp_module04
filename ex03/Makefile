@@ -5,6 +5,7 @@ Cure.cpp \
 Ice.cpp \
 MateriaSource.cpp \
 main.cpp
+# orthodox_test.cpp
 OBJS=$(SRCS:%.cpp=%.o)
 
 CXX = c++

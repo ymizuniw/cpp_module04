@@ -5,6 +5,7 @@
 // AMateria(AMateria const &materia);
 // AMateria(std::string const &type);
 // AMateria &operator=(AMateria const &materia);
+
 AMateria::AMateria(void) : type_("default_materia") {
   std::cout << "AMateria default constructor called" << std::endl;
 }

@@ -21,6 +21,20 @@ int main(void) {
   AMateria *olice = new Ice();
   source->learnMateria(olice);
 
+  // Character copy test
+  Character a("a");
+  a.equip(source->createMateria("ice"));
+
+  Character b(a);
+  Character c("c");
+  c = a;
+
+  a.use(0, b);
+  b.use(0, a);
+  c.use(0, a);
+
+  /// Manual Test
+
   // create
   AMateria *ices[10];
   for (int i = 0; i < 10; i++) {

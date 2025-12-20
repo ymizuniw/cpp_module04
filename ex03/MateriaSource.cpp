@@ -21,26 +21,38 @@ MateriaSource::MateriaSource(void) {
 
 MateriaSource::MateriaSource(MateriaSource const &other) {
   std::cout << "MateriaSource copy construcotr called" << std::endl;
-  for (int i = 0; i < 4; i++)
-    materia_src_[i] = other.materia_src_[i]->clone();
+  for (int i = 0; i < 4; i++) {
+    if (other.materia_src_[i])
+      materia_src_[i] = other.materia_src_[i]->clone();
+    else
+      materia_src_[i] = NULL;
+  }
 }
 
 MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
   if (this == &other)
     return *this;
   for (int i = 0; i < 4; i++) {
-    if (materia_src_[i] != NULL)
+    if (materia_src_[i] != NULL) {
       delete materia_src_[i];
+      materia_src_[i] = NULL;
+    }
   }
-  for (int i = 0; i < 4; i++)
-    materia_src_[i] = other.materia_src_[i]->clone();
+  for (int i = 0; i < 4; i++) {
+    if (other.materia_src_[i])
+      materia_src_[i] = other.materia_src_[i]->clone();
+    else
+      materia_src_[i] = NULL;
+  }
   return (*this);
 }
 
 MateriaSource::~MateriaSource(void) {
   for (int i = 0; i < 4; i++) {
-    if (materia_src_[i] != NULL)
+    if (materia_src_[i] != NULL) {
       delete (materia_src_[i]);
+      materia_src_[i] = NULL;
+    }
   }
   std::cout << "MateriaSource destructor called" << std::endl;
 }
