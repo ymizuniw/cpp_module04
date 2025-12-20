@@ -26,8 +26,12 @@ Character::Character(std::string const name) : name_(name) {
 
 Character::Character(Character const &other) : name_(other.name_) {
   std::cout << "Character copy constructor called" << std::endl;
-  for (int i = 0; i < 4; i++)
-    slot_[i] = other.slot_[i]->clone(); // replicate and hold.
+  for (int i = 0; i < 4; i++) {
+    if (other.slot_[i])
+      slot_[i] = other.slot_[i]->clone(); // replicate and hold.
+    else
+      slot_[i] = NULL;
+  }
 }
 
 Character &Character::operator=(Character const &other) {
@@ -38,8 +42,12 @@ Character &Character::operator=(Character const &other) {
     if (slot_[i] != NULL)
       delete slot_[i];
   }
-  for (int i = 0; i < 4; i++)
-    slot_[i] = other.slot_[i]->clone(); // replicate and hold.
+  for (int i = 0; i < 4; i++) {
+    if (other.slot_[i])
+      slot_[i] = other.slot_[i]->clone(); // replicate and hold.
+    else
+      slot_[i] = NULL;
+  }
   return (*this);
 }
 
@@ -50,7 +58,12 @@ Character &Character::operator=(Character const &other) {
 //   void unequip(int idx);
 //   void use(int idx, ICharacter &target);
 
+// destructor should delete slot_[i], but unequip should not.
 Character::~Character(void) {
+  for (int i = 0; i < 4; i++) {
+    if (slot_[i] != NULL)
+      delete (slot_[i]);
+  }
   std::cout << "Character destructor called" << std::endl;
 }
 
@@ -67,12 +80,14 @@ void Character::equip(AMateria *m) {
 
 // ensure that the pointer of slot[idx] content is held by caller before unequip
 void Character::unequip(int idx) {
-  if (slot_[idx] != NULL)
+  if (0 <= idx && idx < 4 && slot_[idx] != NULL)
     slot_[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter &target) {
-  if (slot_[idx] != NULL) {
+  if (0 <= idx && idx < 4 && slot_[idx] != NULL) {
     slot_[idx]->use(target);
   }
 }
+
+AMateria *Character::getMateria(int idx) { return (slot_[idx]); }

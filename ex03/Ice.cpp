@@ -10,11 +10,12 @@
 // //   AMateria *clone(void) const;
 // //   void use(ICharacter &target);
 
-Ice::Ice(void) : AMateria() {
+Ice::Ice(void) : AMateria("ice") {
   std::cout << "Ice default constructor called" << std::endl;
 }
 
-Ice::Ice(Ice const &other) : AMateria(other.type_) {
+Ice::Ice(Ice const &other) : AMateria("ice") {
+  (void)other;
   std::cout << "Ice copy constructor called" << std::endl;
 }
 

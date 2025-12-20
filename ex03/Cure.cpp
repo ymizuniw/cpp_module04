@@ -9,11 +9,12 @@
 //   // AMateria *clone(void) const;
 //   // void use(ICharacter &target);
 
-Cure::Cure(void) : AMateria() {
+Cure::Cure(void) : AMateria("cure") {
   std::cout << "Cure default constructor called" << std::endl;
 }
 
-Cure::Cure(Cure const &other) : AMateria(other.type_) {
+Cure::Cure(Cure const &other) : AMateria("cure") {
+  (void)other;
   std::cout << "Cure copy constructor called" << std::endl;
 }
 
