@@ -27,69 +27,25 @@ run() {
     fi
 }
 
+echo "
+=====run normal test=====
+"
 run ex00 test00
 run ex01 test00
 run ex01 test01
 run ex02 test00
 run ex02 test01
 
+echo "
+=====run DEBUG=1 test=====
+"
 run ex00 test00 "DEBUG=1"
 run ex01 test00 "DEBUG=1"
 run ex01 test01 "DEBUG=1"
 run ex02 test00 "DEBUG=1"
 run ex02 test01 "DEBUG=1"
 
-# cd ex00 && ${MAKE_FAST[@]} re -s && ${VALG[@]} ./test00
-# ${MAKE_FAST[@]} re -s "DEBUG=1" && ${VALG[@]} ./test00
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex00:ERROR!"
-#     exit 1
-# fi
-
-# cd ..
-# cd ex01 && ${MAKE_FAST[@]} re -s && ${VALG[@]} ./test00
-# ${MAKE_FAST[@]} re -s "DEBUG=1" && ${VALG[@]} ./test00
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex01:ERROR!"
-#     exit 1
-# fi
-# ${MAKE_FAST[@]} re -s && ${VALG[@]} ./test01
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex01:ERROR!"
-#     exit 1
-# fi
-# ${MAKE_FAST[@]} re -s "DEBUG=1" && ${VALG[@]} ./test01
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex01:ERROR!"
-#     exit 1
-# fi
-
-# cd ..
-# cd ex02 && ${MAKE_FAST[@]} re -s && ${VALG[@]} ./test00
-# ${MAKE_FAST[@]} re -s "DEBUG=1" && ${VALG[@]} ./test00
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex02:ERROR!"
-#     exit 1
-# fi
-# ${MAKE_FAST[@]} re -s && ${VALG[@]} ./test01
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex02:ERROR!"
-#     exit 1
-# fi
-# ${MAKE_FAST[@]} re -s "DEBUG=1" && ${VALG[@]} ./test01
-# EXIT_STATUS=$?
-# if [ $EXIT_STATUS -ne 0 ]; then
-#     printf "%s\n" "ex02:ERROR!"
-#     exit 1
-# fi
-
-printf "%s\n" "All Tests Passed!"
+printf "\n%s\n" "=====All Tests Passed!====="
 cd ex00 && ${MAKE_FAST[@]} -s fclean
 cd ..
 cd ex01 && ${MAKE_FAST[@]} -s fclean
