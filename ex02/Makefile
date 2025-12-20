@@ -43,7 +43,10 @@ $(NAME_1): $(OBJS_1)
 #orthodox rules
 clean:
 	$(RM) -f $(OBJS)
-fclean: clean
+fclean:
+	$(MAKE) clean
 	$(RM) -f $(TESTS)
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 .PHONY: all clean fclean re

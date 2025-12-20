@@ -23,7 +23,10 @@ $(NAME): $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
-fclean: clean
+fclean:
+	$(MAKE) clean
 	$(RM) $(NAME)
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 .PHONY: all clean fclean re
