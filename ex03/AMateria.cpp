@@ -19,9 +19,10 @@ AMateria::AMateria(std::string const &type) : type_(type) {
 }
 
 AMateria &AMateria::operator=(AMateria const &other) {
-  if (this != &other) {
-    type_ = other.type_;
-  }
+  // if (this != &other) {
+  //   type_ = other.type_;
+  // }
+  (void)other;
   return (*this);
 }
 
