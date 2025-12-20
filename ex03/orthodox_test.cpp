@@ -7,56 +7,85 @@
 #include <iostream>
 
 int main(void) {
-  std::cout << "============MateriaSource===========" << std::endl;
+
+  /* ============================================================
+   * MateriaSource : ctor / copy / assignment
+   * ============================================================ */
+  std::cout << "============ MateriaSource ===========" << std::endl;
 
   std::cout << "[Default Ctor] ";
-  MateriaSource mtsrc;
+  MateriaSource src;
+
   std::cout << "[Copy Ctor] ";
-  MateriaSource mtsrc_cp(mtsrc);
-  std::cout << "==========AMateria==========" << std::endl;
+  MateriaSource src_cp(src);
+
+  std::cout << "[Learn Materia]" << std::endl;
   AMateria *ice = new Ice();
   AMateria *cure = new Cure();
-  std::cout << "============================" << std::endl;
-  mtsrc.learnMateria(ice);
-  mtsrc.learnMateria(cure);
-  std::cout << "[Copy Assignment op] " << std::endl;
-  mtsrc_cp = mtsrc;
-  AMateria *icemat = mtsrc.createMateria("ice");
-  AMateria *curemat = mtsrc.createMateria("cure");
-  AMateria *icemat2 = mtsrc_cp.createMateria("ice");
-  AMateria *curemat2 = mtsrc_cp.createMateria("cure");
-  if (icemat->getType() == icemat2->getType() &&
-      curemat->getType() == curemat2->getType())
-    std::cout << "[Type Corresponds!]" << std::endl;
-  else
-    std::cout << "[Type mismatched!]" << std::endl;
+  src.learnMateria(ice);
+  src.learnMateria(cure);
 
-  std::cout << "===============Character===============" << std::endl;
+  std::cout << "[Copy Assignment]" << std::endl;
+  src_cp = src;
+
+  /* ============================================================
+   * createMateria clone consistency
+   * ============================================================ */
+  std::cout << "========== createMateria ==========" << std::endl;
+
+  AMateria *ice1 = src.createMateria("ice");
+  AMateria *cure1 = src.createMateria("cure");
+  AMateria *ice2 = src_cp.createMateria("ice");
+  AMateria *cure2 = src_cp.createMateria("cure");
+
+  if (ice1->getType() == ice2->getType() &&
+      cure1->getType() == cure2->getType())
+    std::cout << "[Type Corresponds]" << std::endl;
+  else
+    std::cout << "[Type Mismatch]" << std::endl;
+
+  /* ============================================================
+   * Character : ctor / copy semantics
+   * ============================================================ */
+  std::cout << "============= Character =============" << std::endl;
+
   std::cout << "[Default Ctor] ";
-  Character Ch1;
+  Character ch1;
+
   std::cout << "[Param Ctor] ";
-  Character Ch2("Tom");
+  Character ch2("Tom");
+
   std::cout << "[Copy Ctor] ";
-  Character Ch3(Ch1);
-  if (Ch3.getName() == Ch1.getName())
-    std::cout << "[Name Copied!]" << std::endl;
+  Character ch3(ch1);
+  if (ch3.getName() == ch1.getName())
+    std::cout << "[Name Copied]" << std::endl;
   else
-    std::cout << "[Name Mismatch!]" << std::endl;
-  Character Ch4("Cathy");
-  Ch4.equip(icemat);
-  Ch4.equip(curemat);
-  Ch1 = Ch4;
+    std::cout << "[Name Mismatch]" << std::endl;
 
-  std::cout << "==========SlotCopy===========" << std::endl;
-  std::cout << "[" << Ch4.getName() << "]" << std::endl;
-  Ch4.use(0, Ch2);
-  Ch4.use(1, Ch2);
-  std::cout << "[" << Ch1.getName() << "]" << std::endl;
-  Ch1.use(0, Ch2);
-  Ch1.use(1, Ch2);
-  std::cout << std::endl;
+  /* ============================================================
+   * equip / assignment deep copy check
+   * ============================================================ */
+  std::cout << "========== Copy Assignment ==========" << std::endl;
 
-  delete icemat2;
-  delete curemat2;
-  return (0);
+  Character ch4("Cathy");
+  ch4.equip(ice1);
+  ch4.equip(cure1);
+
+  ch1 = ch4;
+
+  std::cout << "[Source : " << ch4.getName() << "]" << std::endl;
+  ch4.use(0, ch2);
+  ch4.use(1, ch2);
+
+  std::cout << "[Copied : " << ch1.getName() << "]" << std::endl;
+  ch1.use(0, ch2);
+  ch1.use(1, ch2);
+
+  /* ============================================================
+   * Cleanup
+   * ============================================================ */
+  delete ice2;
+  delete cure2;
+
+  return 0;
 }

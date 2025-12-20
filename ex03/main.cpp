@@ -8,80 +8,92 @@
 
 int main(void) {
 
-  // MateriaSource
+  /* ============================================================
+   * 1. MateriaSource basic behavior
+   * ============================================================ */
   IMateriaSource *source = new MateriaSource();
 
-  // learn
   source->learnMateria(new Ice());
   source->learnMateria(new Cure());
   source->learnMateria(new Ice());
   source->learnMateria(new Cure());
 
-  // over learning
-  AMateria *olice = new Ice();
-  source->learnMateria(olice);
+  // over-learn (should be ignored, not deleted internally)
+  AMateria *overflow = new Ice();
+  source->learnMateria(overflow);
 
-  // Character copy test
-  Character a("a");
-  a.equip(source->createMateria("ice"));
+  /* ============================================================
+   * 2. Character copy semantics (Rule of Three)
+   * ============================================================ */
+  {
+    Character a("a");
+    a.equip(source->createMateria("ice"));
 
-  Character b(a);
-  Character c("c");
-  c = a;
+    Character b(a); // copy constructor
+    Character c("c");
+    c = a; // copy assignment
 
-  a.use(0, b);
-  b.use(0, a);
-  c.use(0, a);
+    a.use(0, b);
+    b.use(0, a);
+    c.use(0, a);
+  }
 
-  /// Manual Test
-
-  // create
+  /* ============================================================
+   * 3. createMateria stress test
+   * ============================================================ */
   AMateria *ices[10];
-  for (int i = 0; i < 10; i++) {
-    AMateria *ice = source->createMateria("ice"); // lower case ice.
-    ices[i] = ice;
-  }
-
   AMateria *cures[10];
-  for (int j = 0; j < 10; j++) {
-    AMateria *cure = source->createMateria("cure");
-    cures[j] = cure;
-  }
+
+  for (int i = 0; i < 10; i++)
+    ices[i] = source->createMateria("ice");
+
+  for (int i = 0; i < 10; i++)
+    cures[i] = source->createMateria("cure");
+
+  /* ============================================================
+   * 4. equip / unequip / use boundary test
+   * ============================================================ */
+  ICharacter *bob = new Character("bob");
+  ICharacter *me = new Character("me");
 
   int i = 0;
   int j = 0;
-  // Character
-  ICharacter *bob = new Character("bob");
-  ICharacter *me = new Character("me");
-  // ICharacter *jenny = new Character("jenny");
-  // equip
+
+  // equip up to limit
   bob->equip(ices[i++]);
   bob->equip(ices[i++]);
   bob->equip(ices[i++]);
   bob->equip(ices[i++]);
-  bob->equip(cures[j]); // cannnot equip
-  // unequip
+
+  // equip overflow (should be ignored)
+  bob->equip(cures[j]);
+
+  // unequip test
   AMateria *stash = bob->getMateria(0);
   bob->unequip(0);
 
+  // equip & use
   me->equip(cures[j++]);
   me->use(0, *bob);
-  // use
-  for (int k = 0; k < 5;
-       k++) { // it also test unequipped slot , and out or slot range idx 4
+
+  // use boundary (empty slot & out-of-range)
+  for (int k = 0; k < 5; k++)
     bob->use(k, *me);
-  }
-  for (; i < 10; i++) {
+
+  /* ============================================================
+   * 5. Manual cleanup (ownership test)
+   * ============================================================ */
+  for (; i < 10; i++)
     delete ices[i];
-  }
-  for (; j < 10; j++) {
+
+  for (; j < 10; j++)
     delete cures[j];
-  }
-  // std::cout << "reached!" << std::endl;
-  delete source;
-  delete olice;
+
+  delete stash;
+  delete overflow;
   delete bob;
   delete me;
-  delete stash;
-  return (0);
+  delete source;
+
+  return 0;
 }
