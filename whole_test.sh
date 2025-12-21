@@ -7,7 +7,7 @@ set -o pipefail # 最後のエラーステータスを返す
 
 UNAME=$(uname)
 if [ "$UNAME" = "Linux" ]; then
-    VALG=("valgrind" "--leak-check=full" "--show-leak-kinds=all" "--error-exitcode=1" "-q")
+    VALG=("valgrind" "--leak-check=full" "--show-leak-kinds=all" "--error-exitcode=1")
 else
     VALG=(true)
 fi
@@ -18,12 +18,12 @@ run() {
     DIR=$1
     BIN=$2
     DEBUG_FLAG=${3:-}
-
+    
     cd "$DIR" || exit 1
     ${MAKE_FAST[@]} re -s $DEBUG_FLAG && ${VALG[@]} "./$BIN" >test.log 2>&1
     EXIT_STATUS=$?
     cd ..
-
+    
     if [ $EXIT_STATUS -ne 0 ]; then
         printf "%s\n" "$DIR:$BIN ERROR!"
         exit 1
